@@ -1,4 +1,5 @@
 import { Terminal, Code, Link as LinkIcon, GitBranch, Cpu, Zap, Star, Users, Calendar, Trophy } from "lucide-react";
+import Image from "next/image";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
 import { teamMembers as coreTeam } from "@/data/team";
@@ -8,6 +9,13 @@ const values = [
   { id: "02", title: "Foster Innovation", desc: "Safe space to experiment, fail fast, and build boldly.", color: "text-neon-violet", border: "border-neon-violet/20" },
   { id: "03", title: "Build Community", desc: "Alumni, peers, industry mentors — connected for life.", color: "text-neon-green", border: "border-neon-green/20" },
 ];
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Us",
+  description: "Learn about the mission, values, and team behind Coder Hub.",
+};
 
 export default function About() {
   return (
@@ -113,10 +121,12 @@ export default function About() {
               <ScrollReveal key={idx} animation="zoom-in" delay={idx * 100}>
                 <div className="glassmorphism rounded-2xl overflow-hidden border border-glass-border hover:border-neon-cyan/40 transition-all duration-300 group card-hover">
                   <div className="h-60 relative overflow-hidden">
-                    <img
+                    <Image
                       src={member.image}
                       alt={member.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
                     {/* Tag badge */}

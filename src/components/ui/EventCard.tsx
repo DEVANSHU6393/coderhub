@@ -1,5 +1,6 @@
 import { Calendar, Clock, MapPin, Link as LinkIcon, Terminal } from "lucide-react";
 import { Event } from "@prisma/client";
+import Image from "next/image";
 
 export default function EventCard({ event, isPast = false }: { event: Event, isPast?: boolean }) {
   return (
@@ -10,7 +11,7 @@ export default function EventCard({ event, isPast = false }: { event: Event, isP
     }`}>
       <div className="h-48 relative bg-slate-800">
         {event.imageUrl ? (
-          <img src={event.imageUrl} alt={event.title} className="w-full h-full object-cover" />
+          <Image src={event.imageUrl} alt={event.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-900 to-black">
             <Terminal size={48} className="text-slate-600" />

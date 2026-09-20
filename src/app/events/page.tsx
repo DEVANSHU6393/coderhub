@@ -1,6 +1,13 @@
 import { Terminal, Calendar, MapPin, Clock, Zap, ChevronRight } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
+import Image from "next/image";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Events & Hackathons",
+  description: "Check out upcoming workshops, hackathons, and events from Coder Hub.",
+};
 
 export const dynamic = 'force-dynamic';
 
@@ -53,7 +60,7 @@ function EventCard({ event, isPast }: { event: Event; isPast?: boolean }) {
       {/* Image / placeholder */}
       <div className="h-44 relative bg-slate-900 overflow-hidden shrink-0">
         {event.imageUrl ? (
-          <img src={event.imageUrl} alt={event.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <Image src={event.imageUrl} alt={event.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
         ) : (
           <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 via-black to-blue-950/20 gap-2">
             <Terminal size={32} className="text-neon-cyan/20" />

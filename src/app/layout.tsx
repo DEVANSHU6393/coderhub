@@ -16,8 +16,24 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Coder Hub | Learn. Build. Ship.",
-  description: "The official website of the Coder Hub club, Bundelkhand University. Join us for coding workshops, hackathons, and more.",
+  title: {
+    default: "Coder Hub | Code. Collaborate. Conquer.",
+    template: "%s | Coder Hub",
+  },
+  description: "The official computer science club of Bundelkhand University. Learn, Build, and Ship together with a community of passionate developers.",
+  openGraph: {
+    title: "Coder Hub | Code. Collaborate. Conquer.",
+    description: "The premier computer science club of Bundelkhand University. Join us for workshops, hackathons, open source, and more.",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+    siteName: "Coder Hub",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Coder Hub | Code. Collaborate. Conquer.",
+    description: "The premier computer science club of Bundelkhand University.",
+  },
 };
 
 export default function RootLayout({

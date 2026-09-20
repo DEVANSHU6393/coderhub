@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   Terminal, Globe, ArrowRight, Calendar,
   Wifi, Star, ChevronRight, Users, Braces
@@ -270,7 +271,7 @@ export default async function Home() {
                   <SpotlightCard className="glassmorphism rounded-2xl overflow-hidden border border-neon-cyan/30 glow-cyan card-hover">
                     <div className="h-52 bg-slate-900 relative scanline">
                       {nextEvent.imageUrl ? (
-                        <img src={nextEvent.imageUrl} alt={nextEvent.title} className="w-full h-full object-cover opacity-80" />
+                        <Image src={nextEvent.imageUrl} alt={nextEvent.title} fill className="object-cover opacity-80" sizes="(max-width: 1024px) 100vw, 50vw" />
                       ) : (
                         <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 via-black to-blue-950/30 gap-3">
                           <Terminal size={40} className="text-neon-cyan/30" />

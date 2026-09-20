@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Menu, X, Terminal } from "lucide-react";
@@ -44,7 +45,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center gap-3 text-neon-cyan hover:text-white transition-colors duration-300">
-              <img src="/logo.png" alt="Coder Hub Logo" className="h-10 w-auto rounded-md object-contain" />
+              <Image src="/logo.png" alt="Coder Hub Logo" width={40} height={40} className="h-10 w-auto rounded-md object-contain" />
               <span className="font-mono font-bold text-xl tracking-tight hidden sm:block text-glow">Coder Hub</span>
             </Link>
           </div>

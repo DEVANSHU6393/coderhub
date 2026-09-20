@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Terminal, Globe, Link as LinkIcon, MessageSquare } from "lucide-react";
 
 export default function Footer() {
@@ -7,7 +8,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
-            <img src="/logo.png" alt="Coder Hub Logo" className="h-12 w-auto mb-4 rounded-md object-contain" />
+            <Image src="/logo.png" alt="Coder Hub Logo" width={48} height={48} className="h-12 w-auto mb-4 rounded-md object-contain" />
             <p className="text-slate-400 max-w-sm">
               The official computer science club of Bundelkhand University. Learn, Build, and Ship together with a community of passionate developers.
             </p>
