@@ -6,6 +6,8 @@ function createTransporter() {
     host: process.env.SMTP_HOST || "smtp.gmail.com",
     port: Number(process.env.SMTP_PORT) || 587,
     secure: false, // true for 465, false for other ports
+    connectionTimeout: 10000, // 10 seconds to connect
+    socketTimeout: 10000,     // 10 seconds for response
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS, // Gmail App Password

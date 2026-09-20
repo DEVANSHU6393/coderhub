@@ -289,3 +289,156 @@
   background: rgba(0, 243, 255, 0.25);
   color: #fff;
 }
+
+/* ===================== AURORA BACKGROUND GLOW ===================== */
+.aurora-bg {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.aurora-bg::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(ellipse at 20% 50%, rgba(0, 243, 255, 0.06) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 20%, rgba(138, 43, 226, 0.06) 0%, transparent 50%),
+              radial-gradient(ellipse at 50% 80%, rgba(0, 255, 136, 0.04) 0%, transparent 50%);
+  animation: aurora-drift 20s ease-in-out infinite alternate;
+}
+@keyframes aurora-drift {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  33%  { transform: translate(30px, -20px) rotate(2deg); }
+  66%  { transform: translate(-20px, 30px) rotate(-1deg); }
+  100% { transform: translate(10px, -10px) rotate(1deg); }
+}
+
+/* ===================== HOLOGRAPHIC SHIMMER ===================== */
+.holo-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.holo-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 50%; height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 243, 255, 0.08),
+    rgba(138, 43, 226, 0.08),
+    transparent
+  );
+  animation: holo-sweep 4s ease-in-out infinite;
+}
+@keyframes holo-sweep {
+  0%   { left: -100%; }
+  100% { left: 200%; }
+}
+
+/* ===================== NEON PULSE RING ===================== */
+.pulse-ring {
+  position: relative;
+}
+.pulse-ring::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  border: 1px solid rgba(0, 243, 255, 0.3);
+  animation: pulse-border 3s ease-in-out infinite;
+}
+@keyframes pulse-border {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50%      { opacity: 0.8; transform: scale(1.02); }
+}
+
+/* ===================== ANIMATED NEON BORDER ===================== */
+.neon-border-animated {
+  position: relative;
+  overflow: hidden;
+}
+.neon-border-animated::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--border-angle, 0deg),
+    rgba(0, 243, 255, 0.6),
+    transparent 20%,
+    transparent 40%,
+    rgba(138, 43, 226, 0.6) 50%,
+    transparent 70%,
+    transparent 80%,
+    rgba(0, 255, 136, 0.6)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: border-spin 4s linear infinite;
+}
+@keyframes border-spin {
+  to { --border-angle: 360deg; }
+}
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* ===================== FLOATING ORB ===================== */
+.floating-orb {
+  animation: orb-float 6s ease-in-out infinite;
+}
+.floating-orb:nth-child(2) { animation-delay: -2s; }
+.floating-orb:nth-child(3) { animation-delay: -4s; }
+@keyframes orb-float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-20px) scale(1.05); }
+}
+
+/* ===================== HEX GRID ===================== */
+.bg-hex {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%2300f3ff' fill-opacity='0.02'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ===================== GRADIENT TEXT ANIMATION ===================== */
+.gradient-text-animated {
+  background: linear-gradient(
+    90deg,
+    #00f3ff, #0077ff, #8a2be2, #ff00aa, #00ff88, #00f3ff
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-flow 6s linear infinite;
+}
+@keyframes gradient-flow {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+/* ===================== DATA STREAM LINE ===================== */
+.data-stream {
+  position: relative;
+  overflow: hidden;
+}
+.data-stream::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, transparent, #00f3ff, #8a2be2, transparent);
+  animation: stream-flow 3s linear infinite;
+}
+@keyframes stream-flow {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}

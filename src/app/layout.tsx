@@ -31,6 +31,7 @@ export default function RootLayout({
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-black text-slate-200 font-sans min-h-screen flex flex-col`}
       >
         <AnimatedBackground />
+        <div className="aurora-bg" />
         <Navbar />
         <main className="flex-1 flex flex-col relative z-10 pt-16">
           {children}

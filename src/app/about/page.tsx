@@ -38,12 +38,7 @@ const coreTeam = [
   }
 ];
 
-const milestones = [
-  { year: "2020", title: "Club Founded", desc: "4 CS students. 1 dream. Zero resources. Pure passion.", icon: Star },
-  { year: "2022", title: "100 Members", desc: "Crossed the 100-member milestone. Largest tech club on campus.", icon: Users },
-  { year: "2024", title: "Industry Connect", desc: "First alumni hiring drive. 20+ placements linked back to us.", icon: Zap },
-  { year: "2025+", title: "Building the Future", desc: "AI, blockchain, systems — we're going deeper. Join us.", icon: Cpu },
-];
+
 
 const values = [
   { id: "01", title: "Bridge the Skill Gap", desc: "Hands-on industry-standard tools — not textbook theory.", color: "text-neon-cyan", border: "border-neon-cyan/20" },
@@ -133,35 +128,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* ==================== TIMELINE ==================== */}
-      <section className="py-24 relative z-10">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="font-mono text-xs text-neon-green mb-3">// git log --oneline --graph</div>
-            <h2 className="text-3xl md:text-4xl font-bold font-mono">Our Journey</h2>
-          </div>
-          <div className="relative">
-            {/* Vertical line */}
-            <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-neon-cyan via-neon-violet to-transparent" />
-            <div className="space-y-10">
-              {milestones.map((m, i) => (
-                <div key={i} className="relative flex gap-8 group">
-                  {/* Circle */}
-                  <div className="relative z-10 w-16 h-16 shrink-0 rounded-full glassmorphism border border-neon-cyan/30 flex flex-col items-center justify-center group-hover:border-neon-cyan/80 transition-colors">
-                    <m.icon size={16} className="text-neon-cyan mb-0.5" />
-                    <span className="text-neon-cyan font-mono text-xs font-bold">{m.year.slice(-2)}</span>
-                  </div>
-                  <div className="glassmorphism p-6 rounded-xl border border-glass-border hover:border-neon-cyan/30 transition-colors flex-1 card-hover">
-                    <div className="font-mono text-xs text-slate-600 mb-1">{m.year}</div>
-                    <h3 className="text-white font-bold text-lg mb-1">{m.title}</h3>
-                    <p className="text-slate-400 text-sm">{m.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* ==================== CORE TEAM ==================== */}
       <section className="py-24 bg-black/50 border-t border-glass-border relative z-10">

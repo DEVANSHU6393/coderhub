@@ -113,8 +113,8 @@ const codeSnippet = [
   { indent: 1, content: <>{"}"}</> },
   { indent: 0, content: <>{"}"}</> },
   { indent: 0, content: <></> },
-  { indent: 0, content: <><span className="text-slate-500">// 🔥 Initialize</span></> },
-  { indent: 0, content: <><span className="text-neon-violet">const</span> <span className="text-neon-cyan">you</span> = <span className="text-neon-violet">new</span> <span className="text-neon-cyan">CoderHub</span>.<span className="text-neon-green">join</span>();</> },
+  { indent: 0, content: <><span className="text-slate-500">// 🔥 Ready to build?</span></> },
+  { indent: 0, content: <><span className="text-neon-violet">const</span> <span className="text-neon-cyan">future</span> = <span className="text-neon-violet">await</span> <span className="text-neon-cyan">CoderHub</span>.<span className="text-neon-green">apply</span>();</> },
 ];
 
 export default async function Home() {
@@ -124,25 +124,25 @@ export default async function Home() {
     <div className="flex flex-col min-h-screen overflow-x-hidden">
 
       {/* ==================== HERO ==================== */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 bg-grid">
+      <section className="relative min-h-screen flex items-center justify-center px-4 bg-grid bg-hex">
         {/* Glow orbs */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-neon-cyan/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-neon-violet/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-neon-blue/3 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-neon-cyan/5 rounded-full blur-3xl pointer-events-none floating-orb" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-neon-violet/5 rounded-full blur-3xl pointer-events-none floating-orb" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-neon-blue/3 rounded-full blur-3xl pointer-events-none floating-orb" />
 
         <div className="relative z-10 w-full max-w-7xl mx-auto mt-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
           {/* Left — Text */}
           <div>
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glassmorphism border border-neon-cyan/30 text-neon-cyan text-sm font-mono mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glassmorphism border border-neon-cyan/30 text-neon-cyan text-sm font-mono mb-8 holo-shimmer">
               <span className="w-2 h-2 rounded-full bg-neon-green animate-pulse" />
               <span>01 Systems Online — BU Campus Network</span>
             </div>
 
             <h1 className="text-5xl md:text-7xl font-bold font-mono leading-tight mb-6 tracking-tight">
               <span className="block text-white">Code.</span>
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan via-neon-blue to-neon-violet text-glow">
+              <span className="block gradient-text-animated">
                 Collaborate.
               </span>
               <span className="block text-white">Conquer.</span>
@@ -269,7 +269,7 @@ export default async function Home() {
             {features.map((f, i) => (
               <div
                 key={i}
-                className={`glassmorphism p-8 rounded-2xl border border-glass-border ${f.border} transition-all duration-300 group card-hover`}
+                className={`glassmorphism p-8 rounded-2xl border border-glass-border ${f.border} transition-all duration-300 group card-hover data-stream`}
               >
                 <div className={`w-14 h-14 rounded-xl ${f.bg} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
                   <f.icon className={f.color} size={26} />
@@ -396,7 +396,7 @@ export default async function Home() {
       {/* ==================== CTA ==================== */}
       <section className="py-28 relative z-10">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <div className="glassmorphism-strong rounded-3xl p-16 border border-neon-cyan/20 relative overflow-hidden">
+          <div className="glassmorphism-strong rounded-3xl p-16 border border-neon-cyan/20 relative overflow-hidden pulse-ring">
             {/* Decorative glow */}
             <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan/5 via-transparent to-neon-violet/5 pointer-events-none" />
             <div className="absolute -top-20 -right-20 w-60 h-60 bg-neon-cyan/10 rounded-full blur-3xl pointer-events-none" />
@@ -420,7 +420,7 @@ export default async function Home() {
                   className="group px-10 py-4 rounded-xl bg-neon-cyan text-black font-mono font-bold hover:bg-white transition-all duration-300 glow-cyan flex items-center justify-center gap-2"
                 >
                   <Terminal size={16} />
-                  Initialize Membership
+                  Apply Now
                   <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link

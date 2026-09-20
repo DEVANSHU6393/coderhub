@@ -109,15 +109,13 @@ export async function submitApplication(prevState: any, formData: FormData) {
       }
     });
 
-    // Send email notifications (non-blocking — won't fail the submission)
-    try {
-      await Promise.all([
-        sendAdminNotification(dbData),
-        sendApplicantConfirmation(dbData.fullName, dbData.email),
-      ]);
-    } catch (emailError) {
+    // Send email notifications (fire-and-forget — won't block the response)
+    Promise.all([
+      sendAdminNotification(dbData),
+      sendApplicantConfirmation(dbData.fullName, dbData.email),
+    ]).catch((emailError) => {
       console.error("Email notification failed (application still saved):", emailError);
-    }
+    });
 
     return {
       success: true,
