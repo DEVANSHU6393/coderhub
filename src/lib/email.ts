@@ -1,20 +1,13 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
-// Create reusable transporter using Gmail SMTP
-function createTransporter() {
-  const port = Number(process.env.SMTP_PORT) || 587;
-  console.log(`[Email] Creating SMTP transporter: host=${process.env.SMTP_HOST}, port=${port}, user=${process.env.SMTP_USER ? '***set***' : 'NOT SET'}, pass=${process.env.SMTP_PASS ? '***set***' : 'NOT SET'}`);
-  return nodemailer.createTransport({
-    host: process.env.SMTP_HOST || "smtp.gmail.com",
-    port,
-    secure: port === 465, // true for 465, false for 587
-    connectionTimeout: 10000, // 10 seconds to connect
-    socketTimeout: 10000,     // 10 seconds for response
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS, // Gmail App Password
-    },
-  });
+// Initialize Resend client
+function getResend() {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.log("[Email] RESEND_API_KEY not set. Emails will be skipped.");
+    return null;
+  }
+  return new Resend(apiKey);
 }
 
 interface ApplicationData {
@@ -33,15 +26,14 @@ interface ApplicationData {
 
 // Send notification to admin when a new application is submitted
 export async function sendAdminNotification(application: ApplicationData) {
+  const resend = getResend();
   const adminEmail = process.env.ADMIN_EMAIL;
-  const smtpUser = process.env.SMTP_USER;
+  const fromEmail = process.env.RESEND_FROM_EMAIL || "CoderHub <onboarding@resend.dev>";
 
-  if (!adminEmail || !smtpUser || !process.env.SMTP_PASS) {
-    console.log("Email not configured. Skipping notification.");
+  if (!resend || !adminEmail) {
+    console.log("[Email] Skipping admin notification — not configured.");
     return;
   }
-
-  const transporter = createTransporter();
 
   const html = `
     <!DOCTYPE html>
@@ -118,24 +110,33 @@ export async function sendAdminNotification(application: ApplicationData) {
     </html>
   `;
 
-  await transporter.sendMail({
-    from: `"Coder Hub Website" <${smtpUser}>`,
-    to: adminEmail,
-    subject: `🚀 New Application: ${application.fullName} (${application.rollNumber})`,
-    html,
-  });
+  try {
+    const { data, error } = await resend.emails.send({
+      from: fromEmail,
+      to: adminEmail,
+      subject: `🚀 New Application: ${application.fullName} (${application.rollNumber})`,
+      html,
+    });
+
+    if (error) {
+      console.error("[Email] Admin notification FAILED:", error);
+    } else {
+      console.log("[Email] Admin notification sent! ID:", data?.id);
+    }
+  } catch (err) {
+    console.error("[Email] Admin notification error:", err);
+  }
 }
 
 // Send confirmation email to the applicant
 export async function sendApplicantConfirmation(name: string, email: string) {
-  const smtpUser = process.env.SMTP_USER;
+  const resend = getResend();
+  const fromEmail = process.env.RESEND_FROM_EMAIL || "CoderHub <onboarding@resend.dev>";
 
-  if (!smtpUser || !process.env.SMTP_PASS) {
-    console.log("Email not configured. Skipping applicant confirmation.");
+  if (!resend) {
+    console.log("[Email] Skipping applicant confirmation — not configured.");
     return;
   }
-
-  const transporter = createTransporter();
 
   const html = `
     <!DOCTYPE html>
@@ -176,10 +177,20 @@ export async function sendApplicantConfirmation(name: string, email: string) {
     </html>
   `;
 
-  await transporter.sendMail({
-    from: `"Coder Hub" <${smtpUser}>`,
-    to: email,
-    subject: `✅ Your Coder Hub Application is Received!`,
-    html,
-  });
+  try {
+    const { data, error } = await resend.emails.send({
+      from: fromEmail,
+      to: email,
+      subject: `✅ Your Coder Hub Application is Received!`,
+      html,
+    });
+
+    if (error) {
+      console.error("[Email] Applicant confirmation FAILED:", error);
+    } else {
+      console.log("[Email] Applicant confirmation sent! ID:", data?.id);
+    }
+  } catch (err) {
+    console.error("[Email] Applicant confirmation error:", err);
+  }
 }
