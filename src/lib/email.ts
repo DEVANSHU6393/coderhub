@@ -2,10 +2,12 @@ import nodemailer from "nodemailer";
 
 // Create reusable transporter using Gmail SMTP
 function createTransporter() {
+  const port = Number(process.env.SMTP_PORT) || 587;
+  console.log(`[Email] Creating SMTP transporter: host=${process.env.SMTP_HOST}, port=${port}, user=${process.env.SMTP_USER ? '***set***' : 'NOT SET'}, pass=${process.env.SMTP_PASS ? '***set***' : 'NOT SET'}`);
   return nodemailer.createTransport({
     host: process.env.SMTP_HOST || "smtp.gmail.com",
-    port: Number(process.env.SMTP_PORT) || 587,
-    secure: false, // true for 465, false for other ports
+    port,
+    secure: port === 465, // true for 465, false for 587
     connectionTimeout: 10000, // 10 seconds to connect
     socketTimeout: 10000,     // 10 seconds for response
     auth: {

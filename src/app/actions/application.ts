@@ -110,11 +110,14 @@ export async function submitApplication(prevState: any, formData: FormData) {
     });
 
     // Send email notifications (fire-and-forget — won't block the response)
+    console.log("[Application] Sending email notifications in background...");
     Promise.all([
       sendAdminNotification(dbData),
       sendApplicantConfirmation(dbData.fullName, dbData.email),
-    ]).catch((emailError) => {
-      console.error("Email notification failed (application still saved):", emailError);
+    ]).then(() => {
+      console.log("[Application] Emails sent successfully!");
+    }).catch((emailError) => {
+      console.error("[Application] Email notification FAILED:", emailError.message || emailError);
     });
 
     return {
