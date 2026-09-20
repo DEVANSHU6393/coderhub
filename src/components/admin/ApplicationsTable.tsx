@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Download, Search, CheckCircle, XCircle, Clock } from "lucide-react";
+import { Download, Search, CheckCircle, XCircle, Clock, Trash2 } from "lucide-react";
 import { Application } from "@prisma/client";
-import { updateApplicationStatus } from "@/app/actions/admin";
+import { updateApplicationStatus, deleteApplication } from "@/app/actions/admin";
 
 export default function ApplicationsTable({ initialData }: { initialData: Application[] }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -29,6 +29,13 @@ export default function ApplicationsTable({ initialData }: { initialData: Applic
     
     // Server update
     await updateApplicationStatus(id, newStatus);
+  };
+
+  const handleDelete = async (id: string, name: string) => {
+    if (!confirm(`Are you sure you want to delete ${name}'s application?`)) return;
+    // Optimistic UI removal
+    setApplications(apps => apps.filter(app => app.id !== id));
+    await deleteApplication(id);
   };
 
   const exportCSV = () => {
@@ -179,6 +186,13 @@ export default function ApplicationsTable({ initialData }: { initialData: Applic
                           <Clock size={16} />
                         </button>
                       )}
+                      <button 
+                        onClick={() => handleDelete(app.id, app.fullName)}
+                        className="p-1.5 rounded bg-slate-500/10 text-slate-400 hover:bg-red-500/20 hover:text-red-400 transition-colors ml-1"
+                        title="Delete Application"
+                      >
+                        <Trash2 size={16} />
+                      </button>
                     </div>
                   </td>
                 </tr>

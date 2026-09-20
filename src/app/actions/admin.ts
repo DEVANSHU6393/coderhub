@@ -18,6 +18,19 @@ export async function updateApplicationStatus(id: string, status: string) {
   }
 }
 
+export async function deleteApplication(id: string) {
+  try {
+    await prisma.application.delete({
+      where: { id }
+    });
+    revalidatePath("/admin");
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting application:", error);
+    return { success: false, message: "Failed to delete application" };
+  }
+}
+
 // Events
 export async function createEvent(prevState: any, formData: FormData) {
   try {
