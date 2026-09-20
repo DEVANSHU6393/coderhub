@@ -18,6 +18,8 @@ const applicationSchema = z.object({
   githubUrl: z.string().url("Must be a valid URL").optional().or(z.literal("")),
   linkedinUrl: z.string().url("Must be a valid URL").optional().or(z.literal("")),
   reason: z.string().min(20, "Please provide a more detailed reason (at least 20 characters)"),
+  experience: z.string().min(1, "Experience level is required"),
+  source: z.string().min(1, "Please tell us how you heard about us"),
   honeypot: z.string().max(0).optional()
 });
 
@@ -137,9 +139,14 @@ export default function JoinUs() {
       <section className="pt-36 pb-12 px-4 relative bg-grid overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-neon-cyan/5 rounded-full blur-3xl pointer-events-none" />
         <div className="max-w-3xl mx-auto text-center relative z-10">
-          <div className="inline-flex items-center gap-2 text-neon-cyan font-mono text-sm mb-6 bg-neon-cyan/5 px-4 py-2 rounded-full border border-neon-cyan/20">
-            <Terminal size={14} />
-            ./apply-now.sh — Rolling applications open
+          <div className="flex flex-col items-center gap-3 mb-6">
+            <div className="inline-flex items-center gap-2 text-neon-cyan font-mono text-sm bg-neon-cyan/5 px-4 py-2 rounded-full border border-neon-cyan/20">
+              <Terminal size={14} />
+              ./apply-now.sh — Rolling applications open
+            </div>
+            <div className="inline-flex items-center gap-2 text-neon-pink font-mono text-xs bg-neon-pink/5 px-3 py-1 rounded-full border border-neon-pink/20">
+              Beginners strongly encouraged to apply!
+            </div>
           </div>
           <h1 className="text-5xl md:text-6xl font-bold font-mono mb-5">
             Initialize{" "}
@@ -212,6 +219,30 @@ export default function JoinUs() {
                         <option value="Computer Science">Computer Science</option>
                         <option value="Information Technology">Information Technology</option>
                         <option value="Electronics">Electronics</option>
+                        <option value="Other">Other</option>
+                      </select>
+                      <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none" />
+                    </div>
+                  </InputField>
+                  <InputField label="Experience Level *" error={errors.experience?.message}>
+                    <div className="relative">
+                      <select {...register("experience")} className={selectClass}>
+                        <option value="">-- Select Level --</option>
+                        <option value="Beginner">Beginner (0-1 years)</option>
+                        <option value="Intermediate">Intermediate (1-3 years)</option>
+                        <option value="Advanced">Advanced (3+ years)</option>
+                      </select>
+                      <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none" />
+                    </div>
+                  </InputField>
+                  <InputField label="How did you hear about us? *" error={errors.source?.message}>
+                    <div className="relative">
+                      <select {...register("source")} className={selectClass}>
+                        <option value="">-- Select Source --</option>
+                        <option value="Friend/Classmate">Friend / Classmate</option>
+                        <option value="Social Media">Social Media</option>
+                        <option value="Campus Poster">Campus Poster</option>
+                        <option value="Professor/Faculty">Professor / Faculty</option>
                         <option value="Other">Other</option>
                       </select>
                       <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none" />
@@ -309,6 +340,9 @@ export default function JoinUs() {
               </div>
 
               {/* ── SUBMIT ── */}
+              <div className="mb-4 p-3 rounded-lg bg-black/40 border border-glass-border text-slate-400 text-xs text-center font-mono leading-relaxed">
+                <span className="text-neon-cyan">Privacy Note:</span> Your phone number and email will only be used to contact you regarding your application and club updates. We do not share your data.
+              </div>
               <button
                 type="submit"
                 disabled={isSubmitting}

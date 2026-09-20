@@ -31,6 +31,8 @@ model Application {
   githubUrl   String?
   linkedinUrl String?
   reason      String
+  experience  String   @default("beginner")
+  source      String   @default("other")
   status      String   @default("pending") // "pending", "accepted", "rejected"
   createdAt   DateTime @default(now())
 }

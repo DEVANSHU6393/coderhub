@@ -15,6 +15,8 @@ const applicationSchema = z.object({
   githubUrl: z.string().url("Must be a valid URL").optional().or(z.literal("")),
   linkedinUrl: z.string().url("Must be a valid URL").optional().or(z.literal("")),
   reason: z.string().min(20, "Please provide a more detailed reason (at least 20 characters)"),
+  experience: z.string().min(1, "Experience level is required"),
+  source: z.string().min(1, "Please tell us how you heard about us"),
   honeypot: z.string().max(0, "Spam detected").optional()
 });
 
@@ -62,6 +64,8 @@ export async function submitApplication(prevState: any, formData: FormData) {
       githubUrl: formData.get("githubUrl"),
       linkedinUrl: formData.get("linkedinUrl"),
       reason: formData.get("reason"),
+      experience: formData.get("experience"),
+      source: formData.get("source"),
       honeypot: formData.get("honeypot")
     };
 

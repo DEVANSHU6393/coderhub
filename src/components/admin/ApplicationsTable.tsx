@@ -38,7 +38,7 @@ export default function ApplicationsTable({ initialData }: { initialData: Applic
   };
 
   const exportCSV = () => {
-    const headers = ["Name", "Email", "Phone", "Year", "Branch", "Skills", "Interests", "GitHub", "LinkedIn", "Status", "Date"];
+    const headers = ["Name", "Email", "Phone", "Year", "Branch", "Experience", "Source", "Skills", "Interests", "GitHub", "LinkedIn", "Status", "Date"];
     const csvContent = [
       headers.join(","),
       ...filteredApps.map(app => [
@@ -47,6 +47,8 @@ export default function ApplicationsTable({ initialData }: { initialData: Applic
         `"${app.phone}"`,
         `"${app.year}"`,
         `"${app.branch}"`,
+        `"${app.experience}"`,
+        `"${app.source}"`,
         `"${app.skills.join("; ")}"`,
         `"${app.interests.join("; ")}"`,
         `"${app.githubUrl || ""}"`,
@@ -129,9 +131,14 @@ export default function ApplicationsTable({ initialData }: { initialData: Applic
                   </td>
                   <td className="px-6 py-4">
                     <div className="text-sm text-slate-300">
-                      {app.year}
+                      {app.year} • {app.branch}
                     </div>
-                    <div className="text-sm text-slate-400">{app.branch}</div>
+                    <div className="text-xs text-slate-400 mt-1">
+                      <span className="text-neon-cyan/80">Exp:</span> {app.experience}
+                    </div>
+                    <div className="text-xs text-slate-400">
+                      <span className="text-neon-violet/80">Via:</span> {app.source}
+                    </div>
                   </td>
                   <td className="px-6 py-4 max-w-[250px]">
                     <p className="text-sm text-slate-300 truncate" title={app.reason}>
