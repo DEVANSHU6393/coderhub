@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X, Terminal } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -16,6 +16,15 @@ const navLinks = [
 export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Don't show public navbar on admin pages
   if (pathname.startsWith("/admin")) {
@@ -23,7 +32,14 @@ export default function Navbar() {
   }
 
   return (
-    <header className="fixed top-0 w-full z-50 glassmorphism border-b-0 border-glass-border/50">
+    <div className="fixed top-0 w-full z-50 flex justify-center px-4 pt-4 transition-all duration-300 pointer-events-none">
+      <header 
+        className={`pointer-events-auto transition-all duration-500 w-full ${
+          scrolled 
+            ? "max-w-4xl glassmorphism-strong rounded-full border border-glass-border/50 shadow-[0_8px_32px_rgba(0,0,0,0.5)] py-2" 
+            : "max-w-7xl glassmorphism rounded-2xl border border-transparent py-4"
+        }`}
+      >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
@@ -98,6 +114,7 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+      </header>
+    </div>
   );
 }
