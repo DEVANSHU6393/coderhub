@@ -8,7 +8,6 @@ const applicationSchema = z.object({
   fullName: z.string().min(2, "Name must be at least 2 characters").max(100),
   email: z.string().email("Invalid email address"),
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
-  rollNumber: z.string().min(5, "Roll number is required"),
   year: z.string().min(1, "Year is required"),
   branch: z.string().min(1, "Branch/Department is required"),
   skills: z.array(z.string()).min(1, "Select at least one skill"),
@@ -56,7 +55,6 @@ export async function submitApplication(prevState: any, formData: FormData) {
       fullName: formData.get("fullName"),
       email: formData.get("email"),
       phone: formData.get("phone"),
-      rollNumber: formData.get("rollNumber"),
       year: formData.get("year"),
       branch: formData.get("branch"),
       skills: formData.getAll("skills"),
@@ -84,17 +82,14 @@ export async function submitApplication(prevState: any, formData: FormData) {
     // Check for duplicates
     const existingUser = await prisma.application.findFirst({
       where: {
-        OR: [
-          { email: validatedData.data.email },
-          { rollNumber: validatedData.data.rollNumber }
-        ]
+        email: validatedData.data.email
       }
     });
 
     if (existingUser) {
       return {
         success: false,
-        message: "An application with this email or roll number already exists."
+        message: "An application with this email already exists."
       };
     }
 

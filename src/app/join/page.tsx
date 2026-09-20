@@ -4,14 +4,13 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Terminal, Send, CheckCircle, GitBranch, Code2, User, Mail, Phone, Hash, ChevronDown } from "lucide-react";
+import { Terminal, Send, CheckCircle, GitBranch, Code2, User, Mail, Phone, ChevronDown } from "lucide-react";
 import { submitApplication } from "@/app/actions/application";
 
 const applicationSchema = z.object({
   fullName: z.string().min(2, "Name must be at least 2 characters").max(100),
   email: z.string().email("Invalid email address"),
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
-  rollNumber: z.string().min(5, "Roll number is required"),
   year: z.string().min(1, "Year is required"),
   branch: z.string().min(1, "Branch/Department is required"),
   skills: z.array(z.string()).min(1, "Select at least one skill"),
@@ -193,9 +192,6 @@ export default function JoinUs() {
                   </InputField>
                   <InputField label="Phone Number *" icon={Phone} error={errors.phone?.message}>
                     <input {...register("phone")} className={inputClass} placeholder="9876543210" />
-                  </InputField>
-                  <InputField label="Roll Number *" icon={Hash} error={errors.rollNumber?.message}>
-                    <input {...register("rollNumber")} className={inputClass} placeholder="2022CS001" />
                   </InputField>
                   <InputField label="Year *" error={errors.year?.message}>
                     <div className="relative">

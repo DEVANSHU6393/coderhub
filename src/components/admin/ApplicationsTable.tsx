@@ -39,14 +39,13 @@ export default function ApplicationsTable({ initialData }: { initialData: Applic
   };
 
   const exportCSV = () => {
-    const headers = ["Name", "Email", "Phone", "Roll Number", "Year", "Branch", "Skills", "Interests", "GitHub", "LinkedIn", "Status", "Date"];
+    const headers = ["Name", "Email", "Phone", "Year", "Branch", "Skills", "Interests", "GitHub", "LinkedIn", "Status", "Date"];
     const csvContent = [
       headers.join(","),
       ...filteredApps.map(app => [
         `"${app.fullName}"`,
         `"${app.email}"`,
         `"${app.phone}"`,
-        `"${app.rollNumber}"`,
         `"${app.year}"`,
         `"${app.branch}"`,
         `"${app.skills.join("; ")}"`,
@@ -131,7 +130,7 @@ export default function ApplicationsTable({ initialData }: { initialData: Applic
                   </td>
                   <td className="px-6 py-4">
                     <div className="text-sm text-slate-300">
-                      <span className="font-mono text-neon-cyan">{app.rollNumber}</span> • {app.year}
+                      {app.year}
                     </div>
                     <div className="text-sm text-slate-400">{app.branch}</div>
                   </td>

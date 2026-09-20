@@ -24,7 +24,6 @@ model Application {
   fullName    String
   email       String   @unique
   phone       String
-  rollNumber  String   @unique
   year        String
   branch      String
   skills      String[]

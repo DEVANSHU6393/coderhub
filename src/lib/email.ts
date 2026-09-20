@@ -14,7 +14,6 @@ interface ApplicationData {
   fullName: string;
   email: string;
   phone: string;
-  rollNumber: string;
   year: string;
   branch: string;
   skills: string[];
@@ -77,10 +76,6 @@ export async function sendAdminNotification(application: ApplicationData) {
             <div class="value">${application.phone}</div>
           </div>
           <div class="field">
-            <div class="label">Roll Number</div>
-            <div class="value">${application.rollNumber}</div>
-          </div>
-          <div class="field">
             <div class="label">Year & Branch</div>
             <div class="value">${application.year} Year — ${application.branch}</div>
           </div>
@@ -114,7 +109,7 @@ export async function sendAdminNotification(application: ApplicationData) {
     const { data, error } = await resend.emails.send({
       from: fromEmail,
       to: adminEmail,
-      subject: `🚀 New Application: ${application.fullName} (${application.rollNumber})`,
+      subject: `🚀 New Application: ${application.fullName}`,
       html,
     });
 
