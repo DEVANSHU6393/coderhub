@@ -26,17 +26,22 @@ export default function Footer() {
           <div>
             <h4 className="font-bold text-white mb-4">Connect</h4>
             <div className="flex space-x-4">
-              <a href="https://github.com" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors">
+              <a href="TODO: Add GitHub URL" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors">
                 <Terminal size={20} />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-neon-blue transition-colors">
+              <a href="TODO: Add LinkedIn URL" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-neon-blue transition-colors">
                 <LinkIcon size={20} />
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-pink-500 transition-colors">
+              <a href="TODO: Add Instagram URL" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-pink-500 transition-colors">
                 <Globe size={20} />
               </a>
-              <a href="https://discord.com" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-neon-violet transition-colors">
+              <a href="TODO: Add WhatsApp/Discord URL" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-neon-violet transition-colors">
                 <MessageSquare size={20} />
+              </a>
+            </div>
+            <div className="mt-4">
+              <a href="mailto:TODO: Add Contact Email" className="text-slate-400 hover:text-neon-cyan transition-colors text-sm">
+                TODO: Add Contact Email
               </a>
             </div>
           </div>

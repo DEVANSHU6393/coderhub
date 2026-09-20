@@ -1,45 +1,7 @@
 import { Terminal, Code, Link as LinkIcon, GitBranch, Cpu, Zap, Star, Users, Calendar, Trophy } from "lucide-react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
-const coreTeam = [
-  {
-    name: "Devanshu",
-    tag: "Full-Stack Dev",
-    image: "/devanshu.jpeg",
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
-    color: "neon-cyan",
-  },
-  {
-    name: "Sarah Chen",
-    role: "Vice President",
-    tag: "ML Engineer",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&h=400&auto=format&fit=crop",
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
-    color: "neon-violet",
-  },
-  {
-    name: "Michael Torres",
-    role: "Technical Lead",
-    tag: "Systems & DevOps",
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=400&h=400&auto=format&fit=crop",
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
-    color: "neon-green",
-  },
-  {
-    name: "Priya Patel",
-    role: "Events Coordinator",
-    tag: "Web & Design",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=400&h=400&auto=format&fit=crop",
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
-    color: "neon-pink",
-  }
-];
-
-
+import { teamMembers as coreTeam } from "@/data/team";
 
 const values = [
   { id: "01", title: "Bridge the Skill Gap", desc: "Hands-on industry-standard tools — not textbook theory.", color: "text-neon-cyan", border: "border-neon-cyan/20" },
@@ -98,7 +60,7 @@ export default function About() {
                     while the industry demanded React, Node, Docker, and Git. So they decided to build the club they wished had existed.
                   </p>
                   <p>
-                    Today, Coder Hub is the largest technical club at Bundelkhand University. We have hosted over 30 events, shipped 50+ projects, and directly contributed to more than 20 students landing their first jobs or internships in tech.
+                    Today, Coder Hub is the largest technical club at Bundelkhand University. We have hosted over 30 events and directly contributed to more than 20 students landing their first jobs or internships in tech.
                   </p>
                   <p>
                     We don't just talk about code. We{" "}

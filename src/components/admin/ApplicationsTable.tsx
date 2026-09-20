@@ -13,8 +13,7 @@ export default function ApplicationsTable({ initialData }: { initialData: Applic
   const filteredApps = applications.filter((app) => {
     const matchesSearch = 
       app.fullName.toLowerCase().includes(searchTerm.toLowerCase()) || 
-      app.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      app.rollNumber.toLowerCase().includes(searchTerm.toLowerCase());
+      app.email.toLowerCase().includes(searchTerm.toLowerCase());
     
     const matchesStatus = filterStatus === "all" || app.status === filterStatus;
     
@@ -89,7 +88,7 @@ export default function ApplicationsTable({ initialData }: { initialData: Applic
           <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
           <input 
             type="text" 
-            placeholder="Search by name, email, or roll number..."
+            placeholder="Search by name or email..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full bg-black/50 border border-glass-border rounded-md py-2 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-neon-cyan transition-colors"
