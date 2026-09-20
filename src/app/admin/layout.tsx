@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Terminal, Users, Calendar, LogOut } from "lucide-react";
+import { Terminal, Users, Calendar, LogOut, BookOpen, CheckSquare } from "lucide-react";
 import { logout } from "@/app/actions/auth";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -23,7 +23,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
         </div>
         
-        <nav className="flex-1 p-4 space-y-2">
+        <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
           <Link 
             href="/admin" 
             className={`flex items-center gap-3 px-4 py-3 rounded-md transition-colors ${
@@ -39,13 +39,37 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <Link 
             href="/admin/events" 
             className={`flex items-center gap-3 px-4 py-3 rounded-md transition-colors ${
-              pathname === "/admin/events" || pathname === "/admin/events/create" 
+              pathname.startsWith("/admin/events")
                 ? "bg-neon-cyan/20 text-neon-cyan border border-neon-cyan/50" 
                 : "text-slate-400 hover:text-white hover:bg-white/5"
             }`}
           >
             <Calendar size={18} />
             <span>Events</span>
+          </Link>
+
+          <Link 
+            href="/admin/resources" 
+            className={`flex items-center gap-3 px-4 py-3 rounded-md transition-colors ${
+              pathname.startsWith("/admin/resources")
+                ? "bg-neon-cyan/20 text-neon-cyan border border-neon-cyan/50" 
+                : "text-slate-400 hover:text-white hover:bg-white/5"
+            }`}
+          >
+            <BookOpen size={18} />
+            <span>Resources</span>
+          </Link>
+
+          <Link 
+            href="/admin/tests" 
+            className={`flex items-center gap-3 px-4 py-3 rounded-md transition-colors ${
+              pathname.startsWith("/admin/tests")
+                ? "bg-neon-cyan/20 text-neon-cyan border border-neon-cyan/50" 
+                : "text-slate-400 hover:text-white hover:bg-white/5"
+            }`}
+          >
+            <CheckSquare size={18} />
+            <span>MCQ Tests</span>
           </Link>
         </nav>
         
