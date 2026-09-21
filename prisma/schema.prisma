@@ -46,20 +46,3 @@ model Resource {
   createdAt DateTime @default(now())
 }
 
-model Test {
-  id          String     @id @default(cuid())
-  title       String
-  description String
-  subject     String
-  questions   Question[]
-  createdAt   DateTime   @default(now())
-}
-
-model Question {
-  id           String @id @default(cuid())
-  testId       String
-  test         Test   @relation(fields: [testId], references: [id], onDelete: Cascade)
-  text         String
-  options      String[] // Array of strings for the multiple choices
-  correctIndex Int      // Index of the correct option (0, 1, 2, or 3)
-}

@@ -12,11 +12,16 @@ import FeaturesGrid from "@/components/home/FeaturesGrid";
 export const dynamic = 'force-dynamic';
 
 async function getNextEvent() {
-  const nextEvent = await prisma.event.findFirst({
-    where: { date: { gte: new Date().toISOString().split("T")[0] } },
-    orderBy: { date: 'asc' }
-  });
-  return nextEvent;
+  try {
+    const nextEvent = await prisma.event.findFirst({
+      where: { date: { gte: new Date().toISOString().split("T")[0] } },
+      orderBy: { date: 'asc' }
+    });
+    return nextEvent;
+  } catch (error) {
+    console.error("Database connection failed. Is PostgreSQL running?", error);
+    return null;
+  }
 }
 
 // Tech stack scrolling items

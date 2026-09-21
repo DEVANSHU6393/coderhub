@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Terminal, Users, Calendar, LogOut, BookOpen, CheckSquare } from "lucide-react";
+import { Terminal, Users, Calendar, LogOut, BookOpen } from "lucide-react";
 import { logout } from "@/app/actions/auth";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -60,17 +60,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <span>Resources</span>
           </Link>
 
-          <Link 
-            href="/admin/tests" 
-            className={`flex items-center gap-3 px-4 py-3 rounded-md transition-colors ${
-              pathname.startsWith("/admin/tests")
-                ? "bg-neon-cyan/20 text-neon-cyan border border-neon-cyan/50" 
-                : "text-slate-400 hover:text-white hover:bg-white/5"
-            }`}
-          >
-            <CheckSquare size={18} />
-            <span>MCQ Tests</span>
-          </Link>
+
         </nav>
         
         <div className="p-4 border-t border-glass-border">

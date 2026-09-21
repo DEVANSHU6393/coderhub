@@ -25,8 +25,8 @@ services:
     image: postgres:15-alpine
     # SECURITY: DB port NOT exposed to host — only accessible internally
     # Uncomment below ONLY for local debugging:
-    # ports:
-    #   - "5432:5432"
+    ports:
+      - "5432:5432"
     environment:
       - POSTGRES_USER=coderhub
       - POSTGRES_PASSWORD=coderhub_password
